@@ -1,21 +1,28 @@
 const path = require('path');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const config = {
-	entry: './src/js/index.js',
-	output: {
-		path: path.resolve(__dirname, 'assets/js'),
-		filename: 'bundle.js',
-	},
-	module: {
-		rules: [
-			{
-				test: /\.jsx?$/,
-				exclude: /node_modules/,
-				use: 'babel-loader',
-			},
-		],
-	},
+const entries = {
+	index: './src/js/index.js',
 };
+
+const config = () => (
+	{
+		entry: entries,
+		output: {
+			path: path.resolve(__dirname, 'assets/js'),
+			filename: '[name].js',
+			sourceMapFilename: '[name].js.map',
+		},
+		devtool: 'cheap-module-source-map',
+		module: {
+			rules: [
+				{
+					test: /\.jsx?$/,
+					exclude: /node_modules/,
+					use: 'babel-loader',
+				},
+			],
+		},
+	}
+);
 
 module.exports = config;

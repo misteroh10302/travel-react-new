@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npm-run-all --parallel build:js build:css livereload serve",
+    "dev": "npm-run-all --parallel dev:js dev:css livereload serve",
+    "dev:js": "webpack --progress --colors --watch",
+    "dev:css": "./node_modules/.bin/postcss src/css/*.css --dir assets/css/ -c postcss.config.js -w",
+    "build:js": "webpack --progress --colors",
+    "build:css": "./node_modules/.bin/postcss src/css/*.css --dir assets/css/ -c postcss.config.js",
     "livereload": "livereload 'assets'",
-    "serve": "serve .",
-    "build:js": "webpack --progress --colors --watch",
-    "build:css": "./node_modules/.bin/postcss src/css/*.css --dir assets/css/ -c postcss.config.js -w"
+    "serve": "serve ."
   },
   "keywords": [],
   "author": "",
