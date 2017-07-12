@@ -1,7 +1,7 @@
 const path = require('path');
 
 const entries = {
-	index: './src/js/index.js',
+	bundle: './src/js/bundle.js',
 };
 
 const config = () => (
