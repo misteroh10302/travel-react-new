@@ -1,50 +1,32 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import Feed from './Feed';
+import Makepost from './Makepost';
 
-const One = (props) => {
-	return (
-		<h2>Content for One</h2>
-	);
-};
+class Main extends React.Component {
+	constructor(props) {
+		super(props)
 
-const Two = (props) => {
-	return (
-		<h2>Content for Two</h2>
-	);
-};
+		this.state = {
+			posts: []
+		}
+	}
 
-const Three = (props) => {
-	return (
-		<h2>Content for Three</h2>
-	);
-};
-
-const Four = (props) => {
-	const isActive = (props.match) ? 'is active' : 'is not active';
-	return (
-		<footer>
-			<h4>Route Four {isActive}.</h4>
-		</footer>
-	);
-};
-
-
-const Main = () => {
-	return (
-		<main>
-			<Route path="/one" component={One} />
-			<Route path="/two" component={Two} />
-			<Route path="/three" component={Three} />
-			<Route
-				path="/four"
-				children={
-					props => (
-						<Four {...props} />
-					)
-				}
-			/>
-		</main>
-	);
+	addNewPost(newPost) {
+		this.setState({posts:})
+	}
+	render() {
+		return (
+			<main>
+				<Route path="/post" children={({match}) => {
+						if (match) return <Makepost title="post!" />
+						return null;
+					}}
+				/>
+				<Route exact path="/" component={Feed} />
+			</main>
+		)
+	}
 };
 
 export default Main;

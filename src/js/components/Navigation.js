@@ -4,16 +4,10 @@ import { Link } from 'react-router-dom';
 const Navigation = () => (
 	<nav>
 		<h3>
-			<Link to="/one">One</Link>
+			<Link to="/">Home</Link>
 		</h3>
 		<h3>
-			<Link to="/two">Two</Link>
-		</h3>
-		<h3>
-			<Link to="/three">Three</Link>
-		</h3>
-		<h3>
-			<Link to="/four">Four</Link>
+			<Link to="/post">Post</Link>
 		</h3>
 	</nav>
 );
