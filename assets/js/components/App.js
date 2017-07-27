@@ -11,7 +11,6 @@ class App extends React.Component {
 				<div>
 					<Navigation />
 					<Main />
-					<footer>footer</footer>
 				</div>
 			</BrowserRouter>
 		);

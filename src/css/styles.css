@@ -4,3 +4,64 @@
 
 @import 'components/type';
 @import 'components/shared';
+
+body {
+  font-size: 14px;
+  font-family: Maria pro;
+  font-family: 'Libre Baskerville', serif;
+
+}
+
+main {
+  margin-top: 1em;
+}
+#root {
+  padding: 16px;
+}
+nav {
+  text-align: left;
+  justify-content: left;
+  border-bottom: 1px solid lightgray;
+}
+nav h3 a {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: .75em;
+
+font-family: 'Playfair Display', serif;
+}
+
+.createPost {
+  margin-top: 1em;
+}
+.createPost h2{
+  padding: 1em;
+}
+.post h3,p {
+  display: inline-block;
+  padding: .5em;
+}
+
+input,textarea, button {
+  display: block;
+  border: 1px solid black;
+  padding: .75em;
+  margin: .5em auto;
+}
+
+button {
+  transition: .25s ease;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: black;
+  color:white;
+}
+
+footer {
+  position: absolute;
+  bottom:0;
+  padding: 15px;
+    border-top: 1px solid lightgray;
+}

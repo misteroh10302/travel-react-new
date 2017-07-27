@@ -22,3 +22,9 @@ footer {
 	margin-top: 2rem;
 	font-style: italic;
 }
+
+.createPost {
+	h2 {
+		display:block;
+	}
+}
