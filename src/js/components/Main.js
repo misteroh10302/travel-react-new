@@ -17,15 +17,15 @@ class Main extends React.Component {
 
 		this.state = {
 			posts: [
-				{title: "Title One", text: "Post Text One", slug: "post-1"},
+				{title: "Title One", text: "Post Text One", slug: $slugify{"madeline"}},
 				{title: "Title Two", text: "Post Text Two", slug: "post-2"}
 			],
 			user: {
 				name: "Madeline OMoore",
 				home: "Los Angeles",
 				desc: "Big trips, small budget"
-			}
-		}
+			},
+					}
 		this.addNewPost = this.addNewPost.bind(this);
 	}
 
