@@ -95,3 +95,37 @@ footer {
 .users h3:hover {
   border-bottom: 2px solid lightblue;
 }
+
+.active {
+  opacity: 1;
+}
+
+.inactive {
+  opacity: 0.5;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.inactive p {
+  display: none;
+}
+
+.inactive ~ div {
+  display: none;
+}
+
+.show {
+  color: black;
+  opacity: 1;
+}
+
+.show ~ div {
+  display: block;
+  cursor: pointer;
+}
+
+.show ~ div img {
+  width: 300px;
+  display: block;
+  margin:0 auto;
+}

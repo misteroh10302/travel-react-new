@@ -1,5 +1,7 @@
 import React from 'react';
 import { slugify } from '../utils/helpers';
+import { Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class Makepost extends React.Component {
 
@@ -52,6 +54,8 @@ handleForm() {
 
 
   render() {
+
+    console.log(this.props.match);
     return(
       <div>
           <h2>{this.props.title}</h2>

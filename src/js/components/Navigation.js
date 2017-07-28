@@ -12,6 +12,9 @@ const Navigation = () => (
 		<h3>
 			<Link to="/about">About me</Link>
 		</h3>
+		<h3>
+			<Link to="/all">View all</Link>
+		</h3>
 	</nav>
 );
 

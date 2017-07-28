@@ -4,6 +4,8 @@ import Feed from './Feed';
 import Makepost from './Makepost';
 import About from './About';
 import Post from './Post';
+import Allposts from './Allposts';
+
 const Madeline = (props) => {
 	return(
 		<div>
@@ -17,8 +19,8 @@ class Main extends React.Component {
 
 		this.state = {
 			posts: [
-				{title: "Title One", text: "Post Text One", slug: "post-1", tag: "mexico"},
-				{title: "Title Two", text: "Post Text Two", slug: "post-2", tag: "mexico"}
+				{title: "Title One", text: "Post Text One", slug: "post-1", tag: "mexico", url: "http://media.virbcdn.com/cdn_images/resize_1600x1600/71/2df5e5e91ae7eebf-Image294.jpg"},
+				{title: "Title Two", text: "Post Text Two", slug: "post-2", tag: "paris", url: "http://media.virbcdn.com/cdn_images/resize_1600x1600/b0/666329b06b8c9773-ADELINE_MEXICO.jpg"}
 			],
 			user: [
 			{
@@ -34,32 +36,53 @@ class Main extends React.Component {
 					slug: "user-2"
 				},
 
-			]
+			],
+			tag: undefined,
 		}
 		this.addNewPost = this.addNewPost.bind(this);
+		this.matchTag = this.matchTag.bind(this);
 	}
 
 	addNewPost(newPost) {
 		this.setState({posts: [...this.state.posts, newPost]})
 	}
 
+
+	matchTag(e) {
+		
+		var theTag = e.target.innerHTML;
+		this.setState({tag:theTag});
+	}
+
+
+
 	
 	render() {
+
 		return (
 			<main>
 				<Route exact path="/post" children={({match}) => {
-						if (match) return <Makepost title="Create a post!" makePost={this.addNewPost} />
-						return null;
-					}} />
-				<Route exact path="/" children={({match}) => {
-						if (match) return <Feed posts={this.state.posts} users={this.state.user} />
+						if (match) return <Makepost match={match} title="Create a post!" makePost={this.addNewPost} />
 						return null;
 					}} />
 
-				<Route exact path="/about" children={({match}) => {
+				<Route exact path="/all" children={({match}) => {
+						if (match) return <Allposts match={match} posts={this.state.posts}/>
+						return null;
+				}} />
+				<Route exact path="/all/:activeProject" children={({match}) => {
+						if (match) return <Allposts tag={this.state.tag} match={match || false} matchTag={this.matchTag} posts={this.state.posts}/>
+						return null;
+				}} />
+				<Route exact path="/" children={({match}) => {
+						if (match) return <Feed  posts={this.state.posts} users={this.state.user} />
+						return null;
+					}} />
+
+				{/*<Route exact path="/about" children={({match}) => {
 							if (match) return <About user={this.state.user}  />
 							return null;
-						}} />
+						}} /> */}
 
 				<Route path="/madeline"  children={({match}) => {
 	            if (match) return <Madeline />

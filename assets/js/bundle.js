@@ -25848,6 +25848,15 @@ var Navigation = function Navigation() {
 				{ to: '/about' },
 				'About me'
 			)
+		),
+		_react2.default.createElement(
+			'h3',
+			null,
+			_react2.default.createElement(
+				_reactRouterDom.Link,
+				{ to: '/all' },
+				'View all'
+			)
 		)
 	);
 };
@@ -25889,6 +25898,10 @@ var _Post = __webpack_require__(231);
 
 var _Post2 = _interopRequireDefault(_Post);
 
+var _Allposts = __webpack_require__(232);
+
+var _Allposts2 = _interopRequireDefault(_Allposts);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -25920,7 +25933,7 @@ var Main = function (_React$Component) {
 		var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
 		_this.state = {
-			posts: [{ title: "Title One", text: "Post Text One", slug: "post-1", tag: "mexico" }, { title: "Title Two", text: "Post Text Two", slug: "post-2", tag: "mexico" }],
+			posts: [{ title: "Title One", text: "Post Text One", slug: "post-1", tag: "mexico", url: "http://media.virbcdn.com/cdn_images/resize_1600x1600/71/2df5e5e91ae7eebf-Image294.jpg" }, { title: "Title Two", text: "Post Text Two", slug: "post-2", tag: "paris", url: "http://media.virbcdn.com/cdn_images/resize_1600x1600/b0/666329b06b8c9773-ADELINE_MEXICO.jpg" }],
 			user: [{
 				name: "Madeline OMoore",
 				home: "Los Angeles",
@@ -25931,9 +25944,11 @@ var Main = function (_React$Component) {
 				home: "Los Angeles",
 				desc: "Small trips, small budget",
 				slug: "user-2"
-			}]
+			}],
+			tag: undefined
 		};
 		_this.addNewPost = _this.addNewPost.bind(_this);
+		_this.matchTag = _this.matchTag.bind(_this);
 		return _this;
 	}
 
@@ -25941,6 +25956,13 @@ var Main = function (_React$Component) {
 		key: 'addNewPost',
 		value: function addNewPost(newPost) {
 			this.setState({ posts: [].concat(_toConsumableArray(this.state.posts), [newPost]) });
+		}
+	}, {
+		key: 'matchTag',
+		value: function matchTag(e) {
+
+			var theTag = e.target.innerHTML;
+			this.setState({ tag: theTag });
 		}
 	}, {
 		key: 'render',
@@ -25953,29 +25975,35 @@ var Main = function (_React$Component) {
 				_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/post', children: function children(_ref) {
 						var match = _ref.match;
 
-						if (match) return _react2.default.createElement(_Makepost2.default, { title: 'Create a post!', makePost: _this2.addNewPost });
+						if (match) return _react2.default.createElement(_Makepost2.default, { match: match, title: 'Create a post!', makePost: _this2.addNewPost });
 						return null;
 					} }),
-				_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', children: function children(_ref2) {
+				_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/all', children: function children(_ref2) {
 						var match = _ref2.match;
+
+						if (match) return _react2.default.createElement(_Allposts2.default, { match: match, posts: _this2.state.posts });
+						return null;
+					} }),
+				_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/all/:activeProject', children: function children(_ref3) {
+						var match = _ref3.match;
+
+						if (match) return _react2.default.createElement(_Allposts2.default, { tag: _this2.state.tag, match: match || false, matchTag: _this2.matchTag, posts: _this2.state.posts });
+						return null;
+					} }),
+				_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', children: function children(_ref4) {
+						var match = _ref4.match;
 
 						if (match) return _react2.default.createElement(_Feed2.default, { posts: _this2.state.posts, users: _this2.state.user });
 						return null;
 					} }),
-				_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/about', children: function children(_ref3) {
-						var match = _ref3.match;
-
-						if (match) return _react2.default.createElement(_About2.default, { user: _this2.state.user });
-						return null;
-					} }),
-				_react2.default.createElement(_reactRouterDom.Route, { path: '/madeline', children: function children(_ref4) {
-						var match = _ref4.match;
+				_react2.default.createElement(_reactRouterDom.Route, { path: '/madeline', children: function children(_ref5) {
+						var match = _ref5.match;
 
 						if (match) return _react2.default.createElement(Madeline, null);
 						return null;
 					} }),
-				_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/posts/:activePostSlug', render: function render(_ref5) {
-						var match = _ref5.match;
+				_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/posts/:activePostSlug', render: function render(_ref6) {
+						var match = _ref6.match;
 
 						var activePost = _this2.state.posts.find(function (p) {
 							return p.slug === match.params.activePostSlug;
@@ -25983,8 +26011,8 @@ var Main = function (_React$Component) {
 						console.log(activePost);
 						return _react2.default.createElement(_Post2.default, { content: activePost });
 					} }),
-				_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/user/:activePostSlug', render: function render(_ref6) {
-						var match = _ref6.match;
+				_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/user/:activePostSlug', render: function render(_ref7) {
+						var match = _ref7.match;
 
 						var activePost = _this2.state.user.find(function (u) {
 							return u.slug === match.params.activePostSlug;
@@ -26167,6 +26195,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _helpers = __webpack_require__(228);
 
+var _reactRouterDom = __webpack_require__(92);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26235,6 +26265,8 @@ var Makepost = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+
+      console.log(this.props.match);
       return _react2.default.createElement(
         'div',
         null,
@@ -26313,8 +26345,10 @@ exports.default = About;
 
 
 Object.defineProperty(exports, "__esModule", {
-		value: true
+	value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(7);
 
@@ -26322,29 +26356,162 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Post = function Post(props) {
-		return _react2.default.createElement(
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Post = function (_React$Component) {
+	_inherits(Post, _React$Component);
+
+	function Post(props) {
+		_classCallCheck(this, Post);
+
+		return _possibleConstructorReturn(this, (Post.__proto__ || Object.getPrototypeOf(Post)).call(this, props));
+	}
+
+	_createClass(Post, [{
+		key: 'render',
+		value: function render() {
+			console.log(this.props.match);
+			return _react2.default.createElement(
 				'div',
 				null,
 				_react2.default.createElement(
-						'div',
+					'div',
+					null,
+					_react2.default.createElement(
+						'h1',
 						null,
-						_react2.default.createElement(
-								'h1',
-								null,
-								' ',
-								props.content.title
-						),
-						_react2.default.createElement(
-								'h2',
-								null,
-								props.content.text
-						)
+						this.props.content.title
+					),
+					_react2.default.createElement(
+						'h2',
+						null,
+						this.props.content.text
+					)
 				)
-		);
-};
+			);
+		}
+	}]);
+
+	return Post;
+}(_react2.default.Component);
 
 exports.default = Post;
+
+/***/ }),
+/* 232 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(7);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(92);
+
+var _helpers = __webpack_require__(228);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Postitem = function Postitem(props) {
+	var classNames = ['view view--project'];
+	var active = false;
+	if (props.match.url === '/all/' + props.content.slug) active = "active";else active = "inactive";return _react2.default.createElement(
+		_reactRouterDom.Link,
+		{ to: {
+				pathname: '/all/' + props.content.slug
+			} },
+		_react2.default.createElement(
+			'div',
+			{ className: active },
+			props.content.title,
+			_react2.default.createElement(
+				'p',
+				null,
+				props.content.text
+			)
+		)
+	);
+};
+
+var Tags = function Tags(props) {
+	var classNames = ['view view--project'];
+	var active = false;
+	if (props.content.tag === props.tagName) active = "show";else active = "inactive";
+
+	return _react2.default.createElement(
+		_reactRouterDom.Link,
+		{ to: {
+				pathname: '/all/' + props.content.slug
+			} },
+		_react2.default.createElement(
+			'li',
+			{ onClick: props.matchTag, className: active },
+			props.content.tag
+		),
+		_react2.default.createElement(
+			'div',
+			null,
+			_react2.default.createElement('img', { src: props.content.url, alt: '' }),
+			props.content.title,
+			_react2.default.createElement(
+				'p',
+				null,
+				props.content.text
+			)
+		)
+	);
+};
+
+var Allposts = function (_React$Component) {
+	_inherits(Allposts, _React$Component);
+
+	function Allposts(props) {
+		_classCallCheck(this, Allposts);
+
+		return _possibleConstructorReturn(this, (Allposts.__proto__ || Object.getPrototypeOf(Allposts)).call(this, props));
+	}
+
+	_createClass(Allposts, [{
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
+
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'ul',
+					null,
+					this.props.posts.map(function (post, i) {
+						return _react2.default.createElement(Tags, { key: i + '-' + (0, _helpers.slugify)(post.title), matchTag: _this2.props.matchTag, tagName: _this2.props.tag, content: post });
+					})
+				)
+			);
+		}
+	}]);
+
+	return Allposts;
+}(_react2.default.Component);
+
+exports.default = Allposts;
 
 /***/ })
 /******/ ]);

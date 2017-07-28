@@ -34,7 +34,7 @@ const Feed = (props) => {
   if (props.match) {
    
   }
-
+ 
   return(
     <section id="feed">
       <h2>The post feed</h2>
@@ -44,7 +44,6 @@ const Feed = (props) => {
           {props.users.map((users, i) => <Post key={`${i}-${slugify(users.name)}`} content={users}/>)}
        </div>
          <div className="myFeed">
-
           {props.posts.map((post, i) => <Post key={`${i}-${slugify(post.title)}`} content={post}/>)}
         </div>
       </div>

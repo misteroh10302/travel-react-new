@@ -1,14 +1,24 @@
 import React from 'react';
 
-const Post = (props) => (
-	<div>
-		<div>
 
-				<h1>	{props.content.title}</h1>
-				<h2>{props.content.text}</h2>
-	
+
+class Post extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+	render() {
+		console.log(this.props.match);
+		return(
+			<div>
+				<div>
+
+					<h1>{this.props.content.title}</h1>
+					<h2>{this.props.content.text}</h2>
+			
+				</div>
 			</div>
-	</div>
-);
+		)
+	}
 
+}
 export default Post;
