@@ -17,15 +17,25 @@ class Main extends React.Component {
 
 		this.state = {
 			posts: [
-				{title: "Title One", text: "Post Text One", slug: $slugify{"madeline"}},
-				{title: "Title Two", text: "Post Text Two", slug: "post-2"}
+				{title: "Title One", text: "Post Text One", slug: "post-1", tag: "mexico"},
+				{title: "Title Two", text: "Post Text Two", slug: "post-2", tag: "mexico"}
 			],
-			user: {
-				name: "Madeline OMoore",
-				home: "Los Angeles",
-				desc: "Big trips, small budget"
-			},
-					}
+			user: [
+			{
+					name: "Madeline OMoore",
+					home: "Los Angeles",
+					desc: "Big trips, small budget",
+					slug: "user-1"
+					},
+				{
+					name: "Natalie OMoore",
+					home: "Los Angeles",
+					desc: "Small trips, small budget",
+					slug: "user-2"
+				},
+
+			]
+		}
 		this.addNewPost = this.addNewPost.bind(this);
 	}
 
@@ -42,7 +52,7 @@ class Main extends React.Component {
 						return null;
 					}} />
 				<Route exact path="/" children={({match}) => {
-						if (match) return <Feed posts={this.state.posts}  />
+						if (match) return <Feed posts={this.state.posts} users={this.state.user} />
 						return null;
 					}} />
 
@@ -56,18 +66,20 @@ class Main extends React.Component {
 	            return null;
 	          }}/>
 
-	        <Route path='/posts/:activePostSlug' render={({ match }) => {
+	        <Route exact path='/posts/:activePostSlug' render={({ match }) => {
    				const activePost = this.state.posts.find(p => p.slug === match.params.activePostSlug);
-				console.log(activePost);
+								console.log(activePost);
 				return <Post content={activePost} />
 
 			}} />
 
+			  <Route exact path='/user/:activePostSlug' render={({ match }) => {
+   				const activePost = this.state.user.find(u => u.slug === match.params.activePostSlug);
+				console.log(activePost);
+				return <About content={activePost} />
+			}} />
 
-			 <Route exact path='/posts/post-2' children={({match}) => {
-				 if (match) return <Madeline />
-            		return null;
-			 }} />
+
 
 			</main>
 		)

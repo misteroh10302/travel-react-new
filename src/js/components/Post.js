@@ -4,8 +4,8 @@ const Post = (props) => (
 	<div>
 		<div>
 
-		<h1>	{props.content.title}</h1>
-		<h2>{props.content.text}</h2>
+				<h1>	{props.content.title}</h1>
+				<h2>{props.content.text}</h2>
 	
 			</div>
 	</div>

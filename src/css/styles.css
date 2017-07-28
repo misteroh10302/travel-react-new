@@ -6,10 +6,8 @@
 @import 'components/shared';
 
 body {
-  font-size: 14px;
-  font-family: Maria pro;
-  font-family: 'Libre Baskerville', serif;
-
+  font-size: 12px;
+  font-family: 'Maria pro', serif;
 }
 
 main {
@@ -28,7 +26,6 @@ nav h3 a {
   letter-spacing: 1px;
   font-size: .75em;
 
-font-family: 'Playfair Display', serif;
 }
 
 .createPost {
@@ -64,4 +61,37 @@ footer {
   bottom:0;
   padding: 15px;
     border-top: 1px solid lightgray;
+}
+
+#feed > h2{
+  margin: 1em 1em 2em;
+  text-transform: uppercase;
+}
+.feed {
+  display: flex;
+  flex-direction: row;
+
+}
+.myfeed {
+  width: 60%;
+}
+
+.activeUsers {
+  width: 20%;
+}
+
+.users {
+  text-align:left;
+}
+
+.users h3 {
+  color: lightblue;
+  border-bottom: 2px solid transparent;
+  transition: 0.25s;
+  display: inline-block;
+  clear:both;
+}
+
+.users h3:hover {
+  border-bottom: 2px solid lightblue;
 }
